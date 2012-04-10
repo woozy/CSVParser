@@ -64,5 +64,7 @@ class CSVParser {
 	        } 
 		}
 
+		return $this->lines;
+
 	}
 }
