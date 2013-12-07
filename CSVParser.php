@@ -10,21 +10,39 @@
 
 class CSVParser {
 
-	var $fields; /** column names (if available) **/
-	var $fnames_on_first_line = true; /** if the first line contains field names **/
-	var $separator            = ";"; /** separator **/
-	var $enclosure            = '"'; /** enclosure for each field **/
-	var $row_max_size         = 0; /** maximum size for each line. default 0 (no limit) **/
-	var $lines                = array(); /** will hold file contents **/
-	var $error                = null; /** will hold last error message (for debug) **/
-	var $row_limit			  = 0; /** maximum num lines to parse. default 0 (no limit) **/
+	var $fields;                             // column names (if available)
+	private $fnames_on_first_line = true;    // does first line contains column names? 
+	private $separator            = ";";     // field separator
+	private $enclosure            = '"';     // enclosure for each field
+	private $row_max_size         = 0;       // maximum size for each line. default 0 (no limit)
+	private $lines                = array(); // will hold file contents
+	private $error                = null;    // will hold last error message (for debug purposes)
+	private $row_limit			  = 0;       // maximum num lines to parse. default 0 (no limit) 
 
 
 
-	function parse( $path ) {
-
-		$lines = array();
-
+    public function setSeparator( $sep ) 
+    {
+        $this->separator = $sep;
+    }
+    
+    public function setEnclosure( $enc ) 
+    {
+        $this->enclosure = $enc;
+    }
+    
+    public function setRowMaxSize( $max ) 
+    {
+        $this->row_max_size = $max;
+    }
+    
+    public function setRowLimit( $limit ) 
+    {
+        $this->row_limit = $limit;
+    }
+    
+	public function parse( $path ) 
+    {
 		$lines_f = fopen( $path, 'r' );
 
 
